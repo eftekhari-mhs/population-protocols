@@ -1,1 +1,1 @@
-In this repository I will add population protocols' simulations.
+A repo for population protocols' simulations.
