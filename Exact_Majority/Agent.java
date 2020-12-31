@@ -15,7 +15,14 @@ import java.util.Set;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
+/**
+* The Agent class implements protocol defined in the 
+* "A stable majority population protocol using logarithmic time and states" paper
+* simply displays "Hello World!" to the standard output.
+*
+* @author  eftekhari-mhs
+* @since   2020-12-30 
+*/
 public class Agent {
 
 	enum Gap {
@@ -85,7 +92,7 @@ public class Agent {
 	static Random rnd;
 	static int A_holders, B_holders;
 	private static final String newLine = System.getProperty("line.separator");
-	static Gap gap_mode = Gap.linear; // CONSTANT, Linear, TIE, sqrt
+	static Gap gap_mode = Gap.linear; // constant, linear, tie, square root
 
 	public static void start_simulation(Gap gap, PrintMode print_mode) {
 
@@ -93,6 +100,11 @@ public class Agent {
 		ArrayList<Agent> agents = init_population();
 
 		long interaction_tikz = 0;
+		/***
+		 * Depending on the initial gap, the agents might freeze at phase 2 (linear gap), 4 (tie), or 9 (small gap)
+		 * We use the phase_i_counter variables to avoid running the simulation forever and if the agents stop at 
+		 * either of the above declared phases, terminate the simulation. 
+		 */
 		long phase9_counter = 0;
 		long phase2_counter = 0;
 		long phase4_counter = 0;
